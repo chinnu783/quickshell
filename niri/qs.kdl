@@ -1,0 +1,158 @@
+layer-rule {
+     match namespace="wallpaper"
+     place-within-backdrop true
+}
+overview {
+     workspace-shadow { off; }
+}
+
+spawn-at-startup "/home/dev/.config/scripts/as.sh"
+spawn-at-startup "awww-daemon"
+spawn-at-startup "qs"
+
+binds {
+    // =========================
+    // CORE APPS / MENU
+    // =========================
+    Mod+Q { spawn "kitty"; }
+    Mod+D { spawn "qs" "ipc" "call" "applauncher" "toggle"; }
+    Mod+R { spawn "/usr/bin/" "bash" "/home/dev/.config/scripts/as.sh"; }
+    Mod+L { spawn "qs" "ipc" "call" "lock" "toggle"; }
+    Mod+O { spawn "qs" "ipc" "call" "wallpaper" "toggle"; }
+    Mod+A { spawn "qs" "ipc" "call" "vol-bri-controls" "toggle"; }
+    Mod+P { spawn "qs" "ipc" "call" "powermenu" "toggle"; }
+
+    Mod+M { quit; }
+    Mod+W { close-window; }
+
+    Mod+E { toggle-overview; }
+    Mod+S { toggle-window-floating; }
+
+    // =========================
+    // FOCUS MOVEMENT
+    // =========================
+    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Up    { focus-window-up; }
+    Mod+Down  { focus-window-down; }
+
+    Mod+Tab { focus-column-right; }
+
+    // =========================
+    // MOVE / SWAP WINDOWS
+    // =========================
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+Up    { move-window-up; }
+    Mod+Shift+Down  { move-window-down; }
+
+    // =========================
+    // FLOATING / FULLSCREEN (FIXED PARSING ACTIONS)
+    // =========================
+    Alt+X { toggle-window-floating; }
+    Alt+A { maximize-column; }
+    Alt+F { fullscreen-window; }
+    Alt+Shift+F { fullscreen-window; }
+
+    // =========================
+    // WORKSPACES
+    // =========================
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+
+    // =========================
+    // MONITOR SWITCHING
+    // =========================
+    Mod+Ctrl+Left  { focus-monitor-left; }
+    Mod+Ctrl+Right { focus-monitor-right; }
+    Mod+Ctrl+Up    { focus-monitor-up; }
+    Mod+Ctrl+Down  { focus-monitor-down; }
+
+    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+
+    // =========================
+    // SCROLLER-STYLE NAV
+    // =========================
+    Mod+U { focus-workspace-down; }
+    Mod+I { focus-workspace-up; }
+
+    Mod+Ctrl+U { move-column-to-workspace-down; }
+    Mod+Ctrl+I { move-column-to-workspace-up; }
+
+    Mod+Shift+U { move-workspace-down; }
+    Mod+Shift+I { move-workspace-up; }
+
+    // =========================
+    // COLUMN SCROLL
+    // =========================
+    Mod+Ctrl+Alt+Left  { focus-column-left; }
+    Mod+Ctrl+Alt+Right { focus-column-right; }
+    Mod+Ctrl+Alt+Up    { focus-window-up; }
+    Mod+Ctrl+Alt+Down  { focus-window-down; }
+
+    // =========================
+    // RESIZE / LAYOUT FEEL
+    // =========================
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    Mod+K { switch-preset-column-width; }
+    Mod+Shift+K { switch-preset-window-height; }
+
+    Mod+F { maximize-column; }
+    Mod+Ctrl+F { expand-column-to-available-width; }
+
+    // =========================
+    // SPECIAL COLUMN OPS
+    // =========================
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+
+    Mod+Comma  { consume-window-into-column; }
+    Mod+Period { expel-window-from-column; }
+
+    // =========================
+    // MEDIA KEYS
+    // =========================
+    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "5%+"; }
+    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "5%-"; }
+    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_SINK@" "toggle"; }
+
+    XF86MonBrightnessUp { spawn "brightnessctl" "s" "+5%"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "s" "5%-"; }
+
+
+    // Toggle Notification Control Center Panel
+    Mod+N { spawn "qs" "ipc" "call" "notif" "toggle"; }
+
+    // =========================
+    // MOUSE WHEEL SCROLL (Niri Native Format)
+    // =========================
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+}

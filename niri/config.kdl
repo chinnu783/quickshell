@@ -1,0 +1,108 @@
+prefer-no-csd
+include "qs.kdl"
+input {
+    keyboard {
+        xkb {
+                }
+         numlock
+    }
+    touchpad {
+        tap
+        natural-scroll
+    }
+
+    mouse {
+    }
+
+    trackpoint {
+    }
+    focus-follows-mouse //max-scroll-amount="0%"
+}
+clipboard {
+   disable-primary
+}
+/-output "eDP-1" {
+    mode "1920x1080@120.030"
+    scale 0.7
+    transform "normal"
+    position x=1280 y=0
+}
+environment {
+    QT_QPA_PLATFORM "wayland;xcb"
+    QT_QPA_PLATFORMTHEME "qt5ct"
+}
+layout {
+    gaps 10
+    background-color "transparent"
+
+    border {width 0;}
+    focus-ring {width 0;}
+    center-focused-column "never"
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    default-column-width { proportion 0.5; }
+    struts { }
+}
+
+cursor {
+    xcursor-theme "Bibata-Original-Classic"
+    xcursor-size 24
+}
+
+overview {
+     workspace-shadow {
+        on
+        softness 40
+      }
+}
+
+//spawn-sh-at-startup "dinitctl --user start pipewire"
+//spawn-sh-at-startup "dinitctl --user start pipewire-pulse"
+//spawn-sh-at-startup "dinitctl --user start wireplumber"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "DISPLAY" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "XDG_RUNTIME_DIR"
+//spawn-at-startup "uwsm" "finalize"
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+screenshot-path "~/Pictures/SShots/SShot_%Y-%m-%d%H-%M-%S.png"
+
+animations {
+}
+
+window-rule {
+    match app-id="google-chrome"
+    draw-border-with-background false
+}
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+/-window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+
+    block-out-from "screen-capture"
+}
+window-rule {
+   geometry-corner-radius 12
+   clip-to-geometry true
+}
+window-rule {
+  match app-id="kitty-popup"
+  open-floating true
+}
+window-rule {
+  open-maximized true
+}
+debug {
+   honor-xdg-activation-with-invalid-serial
+}

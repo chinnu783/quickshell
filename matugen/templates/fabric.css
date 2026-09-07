@@ -1,0 +1,28 @@
+/* ~/.config/fabric/matugen_template.css */
+@define-color matugen-bg {{colors.surface.default.hex}};
+@define-color matugen-fg {{colors.on_surface.default.hex}};
+@define-color matugen-module {{colors.surface_container.default.hex}};
+@define-color matugen-module-hover {{colors.surface_container_high.default.hex}};
+
+/* Solid, High-Contrast Accent Palettes */
+@define-color matugen-accent {{colors.primary.default.hex}};
+@define-color matugen-accent-fg {{colors.on_primary.default.hex}};
+
+@define-color matugen-secondary {{colors.secondary.default.hex}};
+@define-color matugen-secondary-fg {{colors.on_secondary.default.hex}};
+
+@define-color matugen-tertiary {{colors.tertiary.default.hex}};
+@define-color matugen-tertiary-fg {{colors.on_tertiary.default.hex}};
+
+/* New vibrant additions for RAM and Network */
+@define-color matugen-primary-container {{colors.primary_container.default.hex}};
+@define-color matugen-on-primary-container {{colors.on_primary_container.default.hex}};
+
+@define-color matugen-inverse-primary {{colors.inverse_primary.default.hex}};
+
+/* Critical Alert (Red) */
+@define-color matugen-error {{colors.error.default.hex}};
+@define-color matugen-error-fg {{colors.on_error.default.hex}};
+
+@define-color matugen-battery-good {{colors.tertiary_container.default.hex}};
+@define-color matugen-battery-good-fg {{colors.on_tertiary_container.default.hex}};

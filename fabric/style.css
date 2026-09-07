@@ -1,0 +1,460 @@
+/* ~/.config/fabric/style.css */
+@import url("/home/dev/.cache/matugen/fabric/colors.css");
+/* --- GLOBAL LAYOUT RESET --- */
+* {
+    all: unset;
+    font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Base floating window settings */
+#bar-window {
+    background-color: transparent;
+}
+
+#main-container {
+    background-color: @matugen-bg;
+    padding: 10px 12px;
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    border-radius: 8px;
+}
+
+/* Base styling rule shared by every capsule shell piece */
+.bar-module {
+    border: 1px solid alpha(@matugen-fg, 0.1);
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin: 0px 4px;
+}
+
+
+/* --- DISTINCT METRIC CAPSULE COLORING --- */
+label#ram-widget {
+    /* background-color: @matugen-module-hover;
+    color: @matugen-fg; */
+    background-color: @matugen-primary-container;
+    color: @matugen-on-primary-container;
+}
+
+label#cpu-widget {
+    background-color: @matugen-secondary;
+    color: @matugen-secondary-fg;
+}
+
+#disk-widget {
+    background-color: @matugen-tertiary;
+    color: @matugen-tertiary-fg;
+}
+
+#network-widget {
+    /*background-color: alpha(@matugen-fg, 0.08);
+    color: @matugen-fg; */
+    background-color: @matugen-inverse-primary;
+    color: @matugen-fg;
+}
+#pw-widget {
+    background-color: alpha(@matugen-module, 0.6);
+    color: @matugen-fg;
+}
+#pw-widget:hover {
+    border: 0.7px solid @matugen-fg;
+    background-color: alpha(@matugen-fg, 0.2);
+}
+
+/* #battery-widget { */
+/*     background-color: @matugen-error; */
+/*     color: @matugen-error-fg; */
+/* } */
+
+#clock-widget {
+    background-color: @matugen-accent;
+    color: @matugen-accent-fg;
+    font-weight: bold;
+}
+
+/* --- DYNAMIC BATTERY STATES WITHOUT HARDCODING --- */
+
+/* Good State: Dynamic wallpaper complementary container */
+.bar-module.battery-module.battery-good {
+    background-color: @matugen-battery-good;
+    color: @matugen-battery-good-fg;
+}
+
+/* Critical State: Dynamic wallpaper error block */
+.bar-module.battery-module.battery-critical {
+    background-color: @matugen-error;
+    color: @matugen-error-fg;
+}
+
+/* --- WORKSPACE WIDGETS (work.py) --- */
+.workspace-btn {
+    color: alpha(@matugen-fg, 0.6);
+    background-color: alpha(@matugen-module, 0.4);
+    border: 1px solid alpha(@matugen-fg, 0.05);
+    border-radius: 6px;
+    padding: 2px 10px;
+    margin: 0px 3px;
+}
+
+.workspace-btn:hover {
+    background-color: alpha(@matugen-secondary, 0.3);
+    color: @matugen-secondary;
+    border: 1px solid alpha(@matugen-secondary, 0.4);
+}
+
+.workspace-btn.focused {
+    background-color: @matugen-accent;
+    color: @matugen-accent-fg;
+    font-weight: bold;
+    border: 1px solid alpha(@matugen-accent, 0.2);
+}
+
+
+/* --- OSD POPUP STYLING (osd.py) --- */
+#osd-window {
+    background-color: transparent;
+}
+
+#osd-container {
+    background-color: @matugen-bg;
+    border: 1px solid alpha(@matugen-fg, 0.12);
+    border-radius: 12px;
+    padding: 12px;
+}
+
+#osd-label {
+    color: @matugen-fg;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* GTK Progress bar engine targeting */
+#osd-progress progress,
+#osd-progress trough {
+    border-radius: 9999px;
+    background-color: alpha(@matugen-fg, 0.1);
+    border: none;
+}
+
+#osd-progress progress {
+    background-color: @matugen-accent;
+}
+
+
+/* --- NOTIFICATION STYLING (notify.py) --- */
+#notification {
+    background-color: @matugen-bg;
+    border: 1px solid alpha(@matugen-fg, 0.12);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+#notification .summary {
+    color: @matugen-fg;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#notification .body {
+    color: alpha(@matugen-fg, 0.8);
+    font-size: 12px;
+}
+
+/* Action block button styles inside notifications */
+#notification button {
+    background-color: alpha(@matugen-module, 0.6);
+    color: @matugen-fg;
+    border: 1px solid alpha(@matugen-fg, 0.08);
+    border-radius: 6px;
+    padding: 6px;
+    margin-top: 4px;
+}
+
+#notification button:hover {
+    background-color: @matugen-module-hover;
+}
+/*Notification Center*/
+#center-container {
+    background-color: @matugen-bg;
+    border: 2px solid @matugen-accent;
+    padding: 20px 16px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+#center-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid alpha(@matugen-fg, 0.1);
+}
+
+#center-header-title {
+    color: @matugen-fg;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+#center-clear-btn {
+    background-color: @matugen-module;
+    color: @matugen-fg;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin-left: 20px;
+}
+
+#center-clear-btn:hover {
+    background-color: @matugen-accent;
+    color: @matugen-accent-fg;
+}
+
+/* Persistent notification card adjustments */
+#center-history-box #notification {
+    background-color: @matugen-module;
+    border: 1px solid alpha(@matugen-accent, 0.4);
+    border-radius: 8px;
+    padding: 12px;
+}
+
+/* --- FABRIC LAUNCHER STYLES --- */
+
+/* The main layout pop-up card container */
+/* Root level targets for the launcher elements */
+#launcher-window {
+    background-color: transparent;
+}
+
+#launcher-container {
+    background-color: @matugen-bg;
+    border: 2px solid @matugen-accent;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+#launcher-search {
+    background-color: @matugen-module;
+    color: @matugen-fg;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+#launcher-item-btn {
+    background-color: transparent;
+    color: @matugen-fg;
+    padding: 8px;
+    border-radius: 8px;
+    padding: 18px 24px;
+}
+
+#launcher-item-btn:hover,
+#launcher-item-btn:focus {
+    background-color: @matugen-accent;
+    color: @matugen-accent-fg;
+}
+
+/* ==========================================================================
+   POWER MENU STYLES (#powermenu-window)
+   ========================================================================== */
+
+#powermenu-container {
+    background-color: @matugen-bg;
+    border: 2px solid @matugen-accent;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+/* Base button styles for the action grid */
+#powermenu-container button {
+    background-color: @matugen-module;
+    color: @matugen-fg;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 16px;
+    transition: all 0.2s ease;
+}
+
+/* Hover & Focus State */
+#powermenu-container button:hover,
+#powermenu-container button:focus {
+    background-color: @matugen-accent;
+    color: @matugen-accent-fg;
+    box-shadow: 0 4px 12px alpha(@matugen-accent, 0.3);
+}
+
+
+/* ==========================================================================
+   WALLPAPER SELECTOR STYLES (#wallpaper-window)
+   ========================================================================== */
+
+/* #wallpaper-container { */
+/*     background-color: @matugen-bg; */
+/*     border: 2px solid @matugen-accent; */
+/*     border-radius: 12px; */
+/*     padding: 24px; */
+/* } */
+
+/* /\* Scroller framework element fallback *\/ */
+/* #wallpaper-scroller scrolledwindow { */
+/*     background-color: transparent; */
+/* } */
+
+/* /\* Targets the items inside the vertical layout list *\/ */
+/* #wallpaper-results { */
+/*     padding: 2px 0px; */
+/* } */
+
+/* /\* Row targets for wallpaper items *\/ */
+/* #wallpaper-item-btn { */
+/*     background-color: transparent; */
+/*     color: @matugen-fg; */
+/*     padding: 18px 24px; */
+/*     margin: 6px 0px; */
+/*     border-radius: 6px; */
+/* } */
+
+/* /\* Hover highlight when navigating through image listings *\/ */
+/* #wallpaper-item-btn:hover, */
+/* #wallpaper-item-btn:focus { */
+/*     background-color: @matugen-accent; */
+/*     color: @matugen-accent-fg; */
+/* } */
+
+/* --- BAR COMPONENT PILLS --- */
+/* --- BAR COMPONENT PILLS --- */
+#bar-volume-pill {
+    background-color: alpha(@matugen-accent, 0.7);
+}
+#bar-brightness-pill {
+    background-color: alpha(@matugen-tertiary, 0.7);
+}
+
+/* --- THE ORIGINAL OUTER BACKGROUND BOX --- */
+#center-controls-box {
+    background-color: alpha(@matugen-module, 0.4);
+    border-radius: 20px;
+    padding: 12px;
+    margin: 8px 12px;
+}
+
+/* --- INNER ROW PILLS (BRIGHT BACKGROUND) --- */
+.slider-pill-row {
+    /* Using a higher alpha with your explicit module color to make it pop */
+    background-color: alpha(@matugen-module-hover, 0.85);
+    border: 1px solid alpha(@matugen-fg, 0.15);
+    border-radius: 9999px; /* Pill shape */
+    padding: 10px 18px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 5px alpha(#000000, 0.08);
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slider-pill-row:last-child {
+    margin-bottom: 0px;
+}
+
+/* Hover effect for a crisp, luminous look */
+.slider-pill-row:hover {
+    background-color: @matugen-module-hover; /* 100% solid and bright */
+    border-color: alpha(@matugen-accent, 0.4);
+    box-shadow: 0 4px 12px alpha(#000000, 0.12);
+}
+
+/* --- THE RUNNING TRACKS (TROUGHS) --- */
+#volume-slider-bar trough, #brightness-slider-bar trough {
+    background-color: alpha(@matugen-fg, 0.1);
+    border-radius: 9999px;
+    min-height: 6px;
+    min-width: 150px;
+    border: none;
+}
+
+/* --- FILLED PROGRESS AREA (HIGHLIGHTS) --- */
+#volume-slider-bar highlight, #brightness-slider-bar highlight {
+    background-color: @matugen-accent;
+    border-radius: 9999px;
+    border: none;
+}
+
+/* --- ICONS --- */
+#volume-icon, #panel-slider-icon {
+    font-size: 15px;
+    color: @matugen-accent;
+    margin-right: 6px;
+}
+
+/* --- SLIDER KNOBS --- */
+#volume-slider-bar slider, #brightness-slider-bar slider {
+    background-color: @matugen-accent;
+    border-radius: 50%;
+    min-height: 6px;
+    min-width: 6px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: none;
+    box-shadow: none;
+}
+
+/* Hovering expanding physics */
+.slider-pill-row:hover slider {
+    background-color: @matugen-fg;
+    border: 6px solid @matugen-accent;
+    min-height: 12px;
+    min-width: 12px;
+    margin-top: -3px;
+    margin-bottom: -3px;
+    box-shadow: 0 1px 4px alpha(#000000, 0.3);
+}
+
+
+/* Fullscreen background overlay shading */
+#wallpaper-container {
+    background-color: alpha(#000000, 0.65);
+    padding: 40px;
+}
+
+#wallpaper-scroller {
+    background-color: transparent;
+}
+
+#wallpaper-center-box {
+    background-color: transparent;
+    padding: 20px;
+}
+
+/* Clear all visible lines, margins, borders from grid layout engines */
+#wallpaper-grid {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* Turn buttons completely clear so only your cards display */
+#wallpaper-item-btn {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 14px;
+    transition: all 180ms ease-in-out;
+}
+
+/* The actual image thumbnail preview card */
+#wallpaper-img {
+    border-radius: 4px;
+    border: 3px solid alpha(@matugen-fg, 0.1);
+}
+
+/* Subtle accent hover highlighting */
+#wallpaper-item-btn:hover {
+}
+
+#wallpaper-item-btn:hover #wallpaper-img {
+    border-color: @matugen-accent;
+    box-shadow: 0 8px 24px alpha(@matugen-accent, 0.3);
+}

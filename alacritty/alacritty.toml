@@ -1,0 +1,7 @@
+[general]
+import = [
+    "/home/dev/.cache/matugen/alacritty/colors.toml"
+]
+
+[window]
+padding = { x=20, y=20 }
