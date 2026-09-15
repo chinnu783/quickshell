@@ -4,15 +4,16 @@ import QtQuick.Controls
 import Qt.labs.folderlistmodel
 import Quickshell
 import Quickshell.Io
+import Quickshell.Wayland
 import ".."
 
 PanelWindow {
     id: root
 
-    implicitWidth: 1140
-    implicitHeight: 560
-    visible: false
+    readonly property int windowWidth: 1140
+    readonly property int windowHeight: 560
 
+    visible: false
     color: "transparent"
 
     anchors {
@@ -22,7 +23,17 @@ PanelWindow {
         right: true
     }
 
-    // Inner container holds the opacity and smooth fade animation
+    mask: Region {
+        item: root.visible ? container : null
+    }
+
+    exclusionMode: ExclusionMode.Ignore
+    WlrLayershell.layer: WlrLayer.Top
+    WlrLayershell.namespace: "qs-wallpaper-selector"
+
+    WlrLayershell.keyboardFocus: root.visible ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
+
+    // Inner container holds opacity for smooth fade animation
     Item {
         id: container
         anchors.fill: parent
@@ -32,10 +43,9 @@ PanelWindow {
             NumberAnimation { duration: 120; easing.type: Easing.OutCubic }
         }
 
-        // Modal background overlay
-        Rectangle {
+        // FIX: Replaced Rectangle with a transparent Item [2]
+        Item {
             anchors.fill: parent
-            color: "#80000000"
 
             MouseArea {
                 anchors.fill: parent
@@ -43,39 +53,98 @@ PanelWindow {
             }
         }
 
-        // Main centered popup box
-        Rectangle {
-            anchors.centerIn: parent
-            width: root.implicitWidth
-            height: root.implicitHeight
-            color: Colors.surface
-            radius: 16
-            border.color: Colors.outline
-            border.width: 1
+        // ── THE VISUAL WRAPPER ──────────────────────────────────────────────
+        Item {
+            id: mainWrapper
+            width: bgPanel.width + 48
+            height: bgPanel.height + 54
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
 
-            MouseArea { anchors.fill: parent }
+            focus: true
+            Keys.onEscapePressed: root.closeSelector()
 
-            Column {
-                anchors.fill: parent
-                anchors.margins: 30
-                spacing: 18
+            // Left Flaring Concave Corner )
+            Canvas {
+                id: leftWing
+                width: 24
+                height: 24
+                anchors.top: bgPanel.top
+                anchors.right: bgPanel.left
 
-                // Text {
-                //     text: "Select Wallpaper"
-                //     color: Colors.primary
-                //     font.pixelSize: 22
-                //     font.bold: true
-                // }
+                onPaint: {
+                    var ctx = getContext("2d");
+                    ctx.reset();
+                    ctx.fillStyle = Colors.surface;
+
+                    ctx.beginPath();
+                    ctx.moveTo(width, 0);
+                    ctx.lineTo(width, height);
+                    ctx.arcTo(width, 0, 0, 0, width);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+            }
+
+            // Main Selector Panel Body ───────
+            Rectangle {
+                id: bgPanel
+                width: root.windowWidth
+                height: root.windowHeight
+                anchors.top: parent.top
+                anchors.topMargin: 54
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: Colors.surface
+
+                topLeftRadius: 0
+                topRightRadius: 0
+                bottomLeftRadius: 16
+                bottomRightRadius: 16
+
+                // border.color: Colors.outline
+                // border.width: 1
+
+                // Prevent clicks inside the selector box from closing it
+                MouseArea {
+                    anchors.fill: parent
+                    propagateComposedEvents: false
+                }
+            }
+
+            // Right Flaring Concave Corner (
+            Canvas {
+                id: rightWing
+                width: 24
+                height: 24
+                anchors.top: bgPanel.top
+                anchors.left: bgPanel.right
+
+                onPaint: {
+                    var ctx = getContext("2d");
+                    ctx.reset();
+                    ctx.fillStyle = Colors.surface;
+
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.lineTo(0, height);
+                    ctx.arcTo(0, 0, width, 0, width);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+            }
+
+            // ── Content Layout Nested inside mainWrapper ──
+            Item {
+                width: bgPanel.width - 40
+                height: bgPanel.height - 40
+                anchors.centerIn: bgPanel
 
                 GridView {
                     id: grid
-                    width: parent.width
-                    height: parent.height - 10
+                    anchors.fill: parent
                     cellWidth: Math.floor(width / 4)
                     cellHeight: 170
                     clip: true
-
-                    // Light buffer for smooth scroll without main-thread freezes
                     cacheBuffer: 300
 
                     model: FolderListModel {
@@ -91,18 +160,18 @@ PanelWindow {
                         height: grid.cellHeight
 
                         Rectangle {
+                            id: card
                             anchors.fill: parent
                             anchors.margins: 8
                             radius: 12
                             color: Colors.module
-                            border.color: Colors.outline
-                            border.width: 1
+                            // border.color: Colors.outline
+                            // border.width: 1
 
-                            // Container for image + bottom bar that gets masked with rounded corners
                             Item {
                                 id: contentContainer
                                 anchors.fill: parent
-                                visible: false // Hidden because MultiEffect renders it with rounded corners
+                                visible: false
 
                                 Image {
                                     anchors.fill: parent
@@ -126,31 +195,27 @@ PanelWindow {
                                         text: model.fileName
                                         color: Colors.surfacefg
                                         font.pixelSize: 11
+                                        font.family: mainFont
                                         elide: Text.ElideRight
                                     }
                                 }
                             }
 
-                            // Clips the entire contentContainer to a 12px corner radius
+                            Rectangle {
+                                id: maskShape
+                                width: contentContainer.width
+                                height: contentContainer.height
+                                radius: 12
+                                color: "black"
+                                visible: false
+                                layer.enabled: true
+                            }
+
                             MultiEffect {
                                 anchors.fill: parent
                                 source: contentContainer
                                 maskEnabled: true
-                                maskSource: mask
-
-                                Item {
-                                    id: mask
-                                    width: parent.width
-                                    height: parent.height
-                                    layer.enabled: true
-                                    visible: false
-
-                                    Rectangle {
-                                        anchors.fill: parent
-                                        radius: 12
-                                        color: "black"
-                                    }
-                                }
+                                maskSource: maskShape
                             }
 
                             MouseArea {
@@ -160,13 +225,9 @@ PanelWindow {
 
                                 onClicked: {
                                     var targetPath = model.filePath;
-                                    var configPath = Quickshell.env("HOME").trim() + "/.config/wl/wl.conf";
+                                    var scriptPath = Quickshell.env("HOME").trim() + "/.config/quickshell/Wallpaper/script.sh";
 
-                                    // applyCmd.command = [
-                                    //     "sh", "-c",
-                                    //     "echo \"" + targetPath + "\" > \"" + configPath + "\" && matugen image \"" + targetPath + "\" --source-color-index 0 && rm -r /etc/greetd/wal && mkdir /etc/greetd/wal && cp \"" + targetPath + "\" /etc/greetd/wal/"
-                                    // ];
-                                    applyCmd.command = [ "/home/dev/.config/quickshell/Wallpaper/script.sh " + targetPath ]
+                                    applyCmd.command = [ scriptPath, targetPath ];
                                     applyCmd.running = true;
                                     root.closeSelector();
                                 }
@@ -182,10 +243,10 @@ PanelWindow {
         id: applyCmd
     }
 
-    // Functions to handle smooth show/hide transitions
     function openSelector() {
         root.visible = true;
         container.opacity = 1;
+        mainWrapper.forceActiveFocus();
     }
 
     function closeSelector() {

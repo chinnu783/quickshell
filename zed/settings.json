@@ -7,6 +7,8 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "buffer_font_family": "Cascadia Code NF",
+  "ui_font_family": ".ZedSans",
   "terminal": {
     "font_family": "FontAwesome"
   },
@@ -24,7 +26,7 @@
   "buffer_font_size": 15,
   "theme": {
     "mode": "dark",
-    "light": "One Light",
+    "light": "Matugen Light",
     "dark": "Matugen Dark",
   },
 }

@@ -1,0 +1,18 @@
+{
+  "primary": "#adc6ff",
+  "primaryfg": "#102f60",
+  "background": "#111318",
+  "backgroundfg": "#e2e2e9",
+  "surface": "#111318",
+  "surfacefg": "#e2e2e9",
+  "surfacea": "#44474f",
+  "outline": "#8e9099",
+  "tertiary": "#debcdf",
+  "tertiaryfg": "#402843",
+  "secondary": "#bfc6dc",
+  "secondaryfg": "#293041",
+  "error": "#ffb4ab",
+  "errorfg": "#690005",
+  "module": "#1e1f25",
+  "module_hover": "#282a2f"
+}

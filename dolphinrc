@@ -1,10 +1,10 @@
 [CompactMode]
 UseSystemFont=false
-ViewFont=CaskaydiaCove Nerd Font,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
+ViewFont=Cascadia Code NF,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
 
 [DetailsMode]
 UseSystemFont=false
-ViewFont=CaskaydiaCove Nerd Font,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
+ViewFont=Cascadia Code NF,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
 
 [General]
 Version=202
@@ -12,7 +12,7 @@ ViewPropsTimestamp=2026,8,21,17,53,32.197
 
 [IconsMode]
 UseSystemFont=false
-ViewFont=CaskaydiaCove Nerd Font,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
+ViewFont=Cascadia Code NF,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
 
 [KFileDialog Settings]
 Places Icons Auto-resize=false
@@ -22,7 +22,7 @@ Places Icons Static Size=22
 MenuBar=Disabled
 
 [PreviewSettings]
-Plugins=ffmpegthumbnailer,appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,ffmpegthumbnailer-audio,glycin-svg,svgthumbnail,gsf-office
+Plugins=audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,gsf-office,opendocumentthumbnail,svgthumbnail
 
 [UiSettings]
 ColorScheme=*

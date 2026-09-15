@@ -2,12 +2,9 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
-import "../../Time"
-import "../../Widgets"
-import "../../Power"
-import "../../SysInfo"
 import "../../Notifications"
-import "../../Vol_Bri"
+import "../../Widgets"
+import "../../Popups"
 import "../.."
 
 PanelWindow {
@@ -25,7 +22,11 @@ PanelWindow {
     implicitHeight: 50
     color: "transparent"
 
+    mask: Region {
+        item: barContain
+    }
     Rectangle {
+        id: barContain
         anchors.fill: parent
         color: Colors.surface
         radius: 16
@@ -45,7 +46,7 @@ PanelWindow {
                 horizontalCenter: parent.horizontalCenter
                 verticalCenter: parent.verticalCenter
             }
-            Loader { active: true; sourceComponent: Workspaces {} }
+            Loader { active: true; sourceComponent: Niri {} }
         }
         // right
         RowLayout {

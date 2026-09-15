@@ -3,6 +3,7 @@ BackgroundNormal=45,45,45
 
 [KDE]
 ShowDeleteCommand=false
+widgetStyle=qt6ct-style
 
 [PreviewSettings]
 EnableRemoteFolderThumbnail=false

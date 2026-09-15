@@ -78,22 +78,22 @@ tooltip_blur_radius=10
 # [GeneralColors]
 #window.color=#111318
 #base.color=#33353a
-#alt.base.color=#1a1b20
+#alt.base.color=#191c20
 #button.color=#37393e
 #light.color=#37393e
-#mid.light.color=#44474f
+#mid.light.color=#43474e
 #dark.color=#111318
-#mid.color=#1a1b20
-#highlight.color=#adc6ff
-#inactive.highlight.color=#adc6ff
+#mid.color=#191c20
+#highlight.color=#a8c8ff
+#inactive.highlight.color=#a8c8ff
 #text.color=#e2e2e9
 #window.text.color=#e2e2e9
 #button.text.color=#e2e2e9
-#disabled.text.color=#2f3036
+#disabled.text.color=#2e3035
 #tooltip.text.color=#e2e2e9
 #highlight.text.color=#e2e2e9
-#link.color=#adc6ff
-#link.visited.color=#debcdf
+#link.color=#a8c8ff
+#link.visited.color=#dcbce1
 #progress.indicator.text.color=#e2e2e9
 
 [GeneralColors]
@@ -102,19 +102,19 @@ base.color=#111318
 alt.base.color=#111318
 button.color=#37393e
 light.color=#37393e
-mid.light.color=#44474f
+mid.light.color=#43474e
 dark.color=#111318
-mid.color=#1a1b20
-highlight.color=#adc6ff
-inactive.highlight.color=#111318  ##adc6ff
+mid.color=#191c20
+highlight.color=#a8c8ff
+inactive.highlight.color=#111318  ##a8c8ff
 text.color=#e2e2e9
 window.text.color=#e2e2e9
 button.text.color=#e2e2e9
-disabled.text.color=#2f3036
+disabled.text.color=#2e3035
 tooltip.text.color=#e2e2e9
 highlight.text.color=#e2e2e9
-link.color=#adc6ff
-link.visited.color=#debcdf
+link.color=#a8c8ff
+link.visited.color=#dcbce1
 progress.indicator.text.color=#e2e2e9
 
 [Hacks]

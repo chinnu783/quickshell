@@ -1,0 +1,10 @@
+[Default Applications]
+application/x-terminal-emulator=kitty.desktop
+application/x-zerosize=dev.zed.Zed.desktop
+application/xhtml+xml=com.google.Chrome.desktop
+text/html=com.google.Chrome.desktop
+text/plain=dev.zed.Zed.desktop
+x-scheme-handler/chrome=com.google.Chrome.desktop
+x-scheme-handler/http=com.google.Chrome.desktop
+x-scheme-handler/https=com.google.Chrome.desktop
+x-scheme-handler/terminal=kitty.desktop

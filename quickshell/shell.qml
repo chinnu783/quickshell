@@ -1,73 +1,57 @@
 import "."
 import "Lock"
-import "Time"
-import "Bars/Float"
-import "Power"
-import "Vol_Bri"
-import "SysInfo"
-import "Widgets"
-import "Wallpaper"
-import "AppLauncher"
 import "Notifications"
-import Niri
+import "Widgets"
+import "Bars/Float"
+import "Popups"
 import QtQuick
 import Quickshell
 import Quickshell.Io
 import QtQuick.Layouts
 
-ShellRoot{
+ShellRoot {
     id: root
 
-    readonly property string mainFont: "CaskaydiaCove Nerd Font"
+    readonly property string mainFont: "Cascadia Code NF" //"CaskaydiaCove Nerd Font"
+
     Component.onCompleted: {
         Qt.application.name = "Quickshell"
         Qt.application.organizationName = "quickshell"
         Qt.application.organizationDomain = "quickshell.org"
     }
-    Niri {
-        id: niri
-        Component.onCompleted: connect()
 
-        onConnected: console.info("Connected to niri")
-        onErrorOccurred: function(error) {
-            console.error("Niri error:", error)
-        }
+    // Main Floating Bar
+    LazyLoader {
+        active: true
+        component: Bar {}
     }
-    // LazyLoader{ active: true; component: Border{} }
-    LazyLoader{ active: true; component: Bar{} }
 
+    // Wallpaper Management
     Wallpapers { id: wallpaperComp }
-    WallpaperSelector {}
+    WallpaperSelector { id: wallpaperSelector }
 
+    // Lockscreen & IPC
     LockScreen {
         id: lockscreen
     }
+
     IpcHandler {
         target: "lock"
 
-        // Usage: quickshell ipc call lock toggle
         function toggle() {
             lockscreen.locked = !lockscreen.locked
         }
 
-        // Usage: quickshell ipc call lock lock
         function lock() {
             lockscreen.locked = true
         }
     }
 
+    // Application Launcher (Per Screen)
     Variants {
         model: Quickshell.screens
         AppLauncher {
-            property var modelData
-            screen: modelData
-        }
-    }
-
-    Variants {
-        model: Quickshell.screens
-        Vol_Bri_Controls {
-            property var modelData
+            required property var modelData
             screen: modelData
         }
     }
@@ -75,11 +59,23 @@ ShellRoot{
     Variants {
         model: Quickshell.screens
         PowerMenu {
-            property var modelData
+            required property var modelData
             screen: modelData
         }
     }
 
+    CalendarPopup {
+        id: calendarPopup
+        visible: false
+    }
+    IpcHandler {
+        target: "notif"
+        function toggle() {
+            if (calendarPopup) calendarPopup.visible = !calendarPopup.visible
+        }
+    }
+
+    // Notification Popups (Per Screen - single instance)
     Variants {
         model: Quickshell.screens
         NotificationPopup {
@@ -87,16 +83,8 @@ ShellRoot{
             screen: modelData
         }
     }
-    NotificationCenter {
-        id: notifCenter
-    }
-    // IpcHandler {
-    //     target: "notif"
-    //     function toggle() {
-    //         notifCenter.open = !notifCenter.open
-    //     }
-    // }
-    NotificationPopup {}
+
+    // On-Screen Display (Volume / Brightness)
     OSD {
         id: osd
     }
